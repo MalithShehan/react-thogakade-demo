@@ -1,15 +1,30 @@
 import './App.css'
 import {createBrowserRouter, RouterProvider} from "react-router";
-import { Dashboard } from "./components/Dashboard";
-import { AddCustomer } from "./components/AddCustomer";
-import { Error } from "./components/Error";
+import { RootLayout } from "./components/RootLayout.tsx";
+import {Dashboard} from "./pages/Dashboard.tsx";
+import {AddCustomer} from "./pages/AddCustomer.tsx";
+import {DeleteCustomer} from "./pages/DeleteCustomer.tsx";
+import {UpdateCustomer} from "./pages/UpdateCustomer.tsx";
+import {Error} from "./pages/Error.tsx";
 
 function App() {
     const router = createBrowserRouter([
-        {path: "/", element: <Dashboard/>},
-        {path: '/add', element: <AddCustomer/>},
-        {path: '*', element: <Error/>}
-    ]);
+            {
+                path : "/",
+                element : <RootLayout />,
+                children : [
+                    {path : '/', element : <Dashboard />},
+                    {path : '/add', element : <AddCustomer/>},
+                    {path : '/delete', element : <DeleteCustomer/>},
+                    {path : 'update', element : <UpdateCustomer/>}
+                ]
+
+            },
+
+            {path : '*', element : <Error/>}
+
+]);
+
     return (
         <>
             <RouterProvider router={router}>
