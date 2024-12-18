@@ -1,10 +1,14 @@
-import {Link} from "react-router";
+import {useContext} from "react";
+import {Customer} from "../model/Customer.ts";
+import {CustomerContext} from "../store/CustomerProvider.tsx";
 
-export function  Dashboard() {
+export function Dashboard() {
+
+    const [customers, setCustomers] = useContext(CustomerContext);
     return (
-        <div>
-            <h1>Dashboard</h1>
-            <Link to={"/add"}>Add Customer</Link>
-        </div>
+        <>
+            Dashboard
+            {customers.map((customer: Customer) => (<div key={customer.email}>{customer.name + ' '+ customer.email + ' '+ customer.phone }</div>))}
+        </>
     );
 }
