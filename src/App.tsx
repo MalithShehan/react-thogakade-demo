@@ -1,29 +1,23 @@
-import './App.css';
-import { useReducer } from "react";
-import {countReducer} from "./reducers/CountReducer.ts";
-
-
-// function countReducer(state: number, action: { type: string; payload: number }) {
-//     switch (action.type) {
-//         case 'increment':
-//             return state + action.payload;
-//         case 'decrement':
-//             return state - action.payload;
-//         default:
-//             return state;
-//     }
-// }
+import {useReducer} from 'react'
+import './App.css'
+import {NameReducer} from "./reducers/NameReducer.ts";
 
 function App() {
-    const [count, dispatch] = useReducer(countReducer, 0);
+    const [firstName, dispatchFirstName] = useReducer(NameReducer, "Empty");
+    const [lastName, dispatchLastName] = useReducer(NameReducer, "Empty");
 
     return (
         <>
-            <p>Count: {count}</p>
-            <button onClick={() => dispatch({ type: 'increment', payload: 1 })}>Increment</button>
-            <button onClick={() => dispatch({ type: 'decrement', payload: 1 })}>Decrement</button>
+            <input type="text" placeholder="Input First Name"
+                   onChange={(e) =>
+                       dispatchFirstName({type: 'UPDATE_NAME', payload: e.target.value})} />
+            <input type="text" placeholder="Input Last Name"
+                   onChange={(e) =>
+                       dispatchLastName({type: 'UPDATE_NAME', payload: e.target.value})} />
+            <br />
+            {firstName} {lastName}
         </>
-    );
+    )
 }
 
-export default App;
+export default App
